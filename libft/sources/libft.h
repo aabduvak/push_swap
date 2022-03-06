@@ -6,7 +6,7 @@
 /*   By: aabduvak <aabduvak@42ISTANBUL.COM.TR>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/25 00:38:59 by aabduvak          #+#    #+#             */
-/*   Updated: 2022/02/16 01:45:15 by aabduvak         ###   ########.fr       */
+/*   Updated: 2022/03/06 05:21:05 by aabduvak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ char	*ft_strdup(char *src);
 
 // Part II
 char	*ft_substr(char const *str, unsigned int start, size_t leng);
-char	*ft_strjoin(char const *s1, char const *s2);
+char	*ft_strjoin(char *s1, char const *s2);
 char	*ft_strtrim(char const *s1, char const *set);
 char	*ft_itoa(int value);
 char	*ft_strmapi(char const *s, char (*f)(unsigned int, char));

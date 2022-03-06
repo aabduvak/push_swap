@@ -6,7 +6,7 @@
 #    By: aabduvak <aabduvak@42ISTANBUL.COM.TR>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/15 16:43:54 by aabduvak          #+#    #+#              #
-#    Updated: 2022/02/16 07:19:09 by aabduvak         ###   ########.fr        #
+#    Updated: 2022/03/02 20:37:43 by aabduvak         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,22 +16,26 @@ NAME			= get_next_line.a
 CC				= gcc
 RM				= rm -f
 CFLAGS			= -Wall -Wextra -Werror
+LIB				= libftprintf.a
 
-all : ${NAME}
+all : $(LIB) $(NAME)
 
-	
-$(NAME) : ${OBJS}
+$(LIB) :
+	make -C ../ft_printf	
+
+$(NAME) : $(OBJS)
+	cp ../ft_printf/$(LIB) ./$(NAME)
 	ar rc $(NAME) $(OBJS)
 	ranlib $(NAME)
 
 .c.o :
-	${CC} ${CFLAGS} -c $< -o $@
+	$(CC) $(CFLAGS) -c $< -o $@
 
 clean :
-	${RM} ${OBJS}
+	$(RM) $(OBJS)
 
 fclean : clean
-	${RM} ${NAME}
+	$(RM) $(NAME)
 
 norm :
 	norminette sources/*.[ch]

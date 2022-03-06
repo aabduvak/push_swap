@@ -6,7 +6,7 @@
 #    By: aabduvak <aabduvak@42ISTANBUL.COM.TR>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/12/24 01:44:57 by aabduvak          #+#    #+#              #
-#    Updated: 2022/02/16 04:50:22 by aabduvak         ###   ########.fr        #
+#    Updated: 2022/03/02 20:36:16 by aabduvak         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,20 +18,16 @@ NAME			= libft.a
 CC				= gcc
 RM				= rm -f
 CFLAGS			= -Wall -Wextra -Werror
-LIB_GNL			= GNL/get_next_line.a
-LIB_PRINT		= ft_printf/libftprintf.a
+LIB				= GNL/get_next_line.a
 
 
-all : $(LIB_GNL) $(LIB_PRINT) ${NAME}
+all : $(LIB) ${NAME}
 
-$(LIB_GNL):
+$(LIB):
 	make -C ./GNL
 
-$(LIB_PRINT):
-	make -C ./ft_printf
-
 $(NAME) : ${OBJS}
-	cp $(LIB_GNL) ./$(NAME)
+	cp $(LIB) ./$(NAME)
 	ar rc $(NAME) $(OBJS)
 	ranlib $(NAME)
 

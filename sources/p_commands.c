@@ -1,36 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strjoin.c                                       :+:      :+:    :+:   */
+/*   p_commands.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aabduvak <aabduvak@42ISTANBUL.COM.TR>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/02 00:47:26 by aabduvak          #+#    #+#             */
-/*   Updated: 2022/03/06 06:08:18 by aabduvak         ###   ########.fr       */
+/*   Created: 2022/03/02 19:18:48 by aabduvak          #+#    #+#             */
+/*   Updated: 2022/03/06 03:26:45 by aabduvak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include <push_swap.h>
 
-char	*ft_strjoin(char *s1, char const *s2)
+void	pb(t_stack *stack)
 {
-	size_t	i;
-	size_t	j;
-	char	*str;
+	if (stack->a_len > 0)
+	{
+		stack->b[stack->b_len++] = stack->a[--stack->a_len];
+		ft_printf("pb\n");
+	}
+}
 
-	i = 0;
-	j = 0;
-	if (!s1 || !s2)
-		return (NULL);
-	str = (char *) malloc((ft_strlen(s1) + ft_strlen(s2) + 1) * sizeof(char));
-	if (!str)
-		return (NULL);
-	while (s1[j])
-		str[i++] = s1[j++];
-	j = 0;
-	while (s2[j])
-		str[i++] = s2[j++];
-	str[i] = '\0';
-	free(s1);
-	return (str);
+void	pa(t_stack *stack)
+{
+	if (stack->b_len > 0)
+	{
+		stack->a[stack->a_len++] = stack->b[--stack->b_len];
+		ft_printf("pa\n");
+	}
 }

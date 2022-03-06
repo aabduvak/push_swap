@@ -3,28 +3,27 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: aabduvak <aabduvak@42istanbul.com.tr>      +#+  +:+       +#+         #
+#    By: aabduvak <aabduvak@42ISTANBUL.COM.TR>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/15 16:23:46 by aabduvak          #+#    #+#              #
-#    Updated: 2022/02/23 03:18:50 by aabduvak         ###   ########.fr        #
+#    Updated: 2022/03/06 15:59:21 by aabduvak         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 SRCS			= $(wildcard sources/*.c)
 OBJS			= $(SRCS:.c=.o)
 
-NAME			= checker
+NAME			= push_swap
 CC				= gcc
 RM				= rm -f
-CFLAGS			= -Wall -Wextra -Werror
-
+CFLAGS			= -Wall -Wextra
 LIB				= ./libft/libft.a
+LIST			:= $(shell "ruby" "-e" "puts (-10..489).to_a.shuffle.join(' ')")
 
 INC_FT			= ./libft/sources
 INC_GN			= ./libft/GNL/sources
 INC_PR			= ./libft/ft_printf/sources
 INC				= ./includes
-LIB_PRINT		= ./libft/ft_printf/libftprintf.a
 
 all : $(LIB) ${NAME}
 
@@ -32,11 +31,13 @@ $(LIB):
 	make -C ./libft
 
 $(NAME) : ${OBJS}
-	$(CC) $(OBJS) -framework OpenGL -framework AppKit -o $(NAME) $(LIB_PRINT) $(LIB)
+	$(CC) $(OBJS) -o $(NAME) $(LIB)
 
-.c.o :
+.c.o:
 	${CC} ${CFLAGS} -c $< -o $@ -I$(INC_PR) -I$(INC_GN) -I$(INC_FT) -I$(INC)
 
+test: $(NAME)
+	bash tester/tester.sh
 # $< input files
 # $@ output files
 # in makefile used to create oputput files in their subfolder
@@ -50,14 +51,21 @@ fclean : clean
 ffclean: fclean
 	make fclean -C ./libft
 
-run :
-	@./$(NAME)
-
 norm :
 	@norminette libft/
 	@norminette sources/*.[ch]
 
 re : fclean all
+
+run : $(NAME)
+	@./$(NAME) $(LIST)
+
+check: $(NAME)
+	./push_swap $(LIST) | ./checker_Mac $(LIST)
+
+vis: $(NAME)
+	cp push_swap push_swap_visualizer/push_swap
+	python3 push_swap_visualizer/pyviz.py $(LIST)
 
 help :
 	@echo "------------------------------------ <<HELP COMMAND>> ------------------------------------"
@@ -69,4 +77,4 @@ help :
 	@echo "make norm       --------- controls all *.c and *.h codes to norminette standart"
 	@echo "                --------- if finds norminette error will break"
 
-.PHONY: all clean fclean re .c.o 
+.PHONY: all clean fclean re run test

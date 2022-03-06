@@ -1,36 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strjoin.c                                       :+:      :+:    :+:   */
+/*   helper_commands.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aabduvak <aabduvak@42ISTANBUL.COM.TR>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/02 00:47:26 by aabduvak          #+#    #+#             */
-/*   Updated: 2022/03/06 06:08:18 by aabduvak         ###   ########.fr       */
+/*   Created: 2022/03/02 19:23:12 by aabduvak          #+#    #+#             */
+/*   Updated: 2022/03/06 03:04:01 by aabduvak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include <push_swap.h>
 
-char	*ft_strjoin(char *s1, char const *s2)
+int	top_a(t_stack *stack)
 {
-	size_t	i;
-	size_t	j;
-	char	*str;
+	return (stack->a[stack->a_len - 1]);
+}
 
-	i = 0;
-	j = 0;
-	if (!s1 || !s2)
-		return (NULL);
-	str = (char *) malloc((ft_strlen(s1) + ft_strlen(s2) + 1) * sizeof(char));
-	if (!str)
-		return (NULL);
-	while (s1[j])
-		str[i++] = s1[j++];
-	j = 0;
-	while (s2[j])
-		str[i++] = s2[j++];
-	str[i] = '\0';
-	free(s1);
-	return (str);
+int	top_b(t_stack *stack)
+{
+	return (stack->b[stack->b_len - 1]);
+}
+
+void	swap(int *a, int *b)
+{
+	int	temp;
+
+	temp = *a;
+	*a = *b;
+	*b = temp;
 }
